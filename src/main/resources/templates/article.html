@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Article</title>
+</head>
+<body>
+    <h1 th:text="${article.title}">Article</h1>
+    <p th:text="${article.content}">Content</p>
+    <p th:text="${article.date}">Date</p>
+    <a th:href="@{/home}">Back to Home</a>
+</body>
+</html>

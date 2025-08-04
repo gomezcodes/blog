@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Personal Blog</h1>
+    <div th:each="a : ${articles}">
+        <a th:href="@{/article/{id}(id=${a.id})}" th:text="${a.title}">Article Title</a>
+        <p th:text="${a.content}">Article Content</p>
+        <p th:text="${a.date}">Article Date</p>
+    </div>
+</body>
+</html>
