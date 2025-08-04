@@ -1,8 +1,10 @@
-package com.gomez.blog;
+package com.gomez.blog.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.gomez.blog.service.model.ArticleDto;
 
 import lombok.RequiredArgsConstructor;
 

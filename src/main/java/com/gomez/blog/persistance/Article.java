@@ -1,4 +1,4 @@
-package com.gomez.blog;
+package com.gomez.blog.persistance;
 
 import java.time.LocalDate;
 

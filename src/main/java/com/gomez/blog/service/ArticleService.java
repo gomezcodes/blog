@@ -1,4 +1,4 @@
-package com.gomez.blog;
+package com.gomez.blog.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +7,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+
+import com.gomez.blog.persistance.Article;
+import com.gomez.blog.persistance.repository.ArticleRepository;
+import com.gomez.blog.service.exception.ArticleNotFoundException;
+import com.gomez.blog.service.model.ArticleDto;
 
 import lombok.RequiredArgsConstructor;
 

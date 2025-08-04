@@ -1,4 +1,4 @@
-package com.gomez.blog;
+package com.gomez.blog.controller.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
