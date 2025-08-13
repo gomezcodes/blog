@@ -30,11 +30,11 @@ public class ArticleService {
                     article.getId(), 
                     article.getTitle(),
                     article.getContent(), 
-                    mapDate(article.getDate())))
+                    mapDateToString(article.getDate())))
             .collect(Collectors.toList());
     }
 
-    private String mapDate(LocalDate date) {
+    private String mapDateToString(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
         return date.format(formatter);
     }
@@ -47,9 +47,24 @@ public class ArticleService {
         }
 
         Article articleEntity = articleOp.get();
-        ArticleDto article = new ArticleDto(articleEntity.getId(), articleEntity.getTitle(), articleEntity.getContent(), mapDate(articleEntity.getDate()));
+        ArticleDto article = new ArticleDto(articleEntity.getId(), articleEntity.getTitle(), articleEntity.getContent(), mapDateToString(articleEntity.getDate()));
 
         return article;
     }
 
+    public void save(ArticleDto article) {
+        Article articleToSave = new Article();
+        articleToSave.setTitle(article.title());
+        articleToSave.setContent(article.content());
+        articleToSave.setDate(mapStringToDate(article.date()));
+        repository.save(articleToSave);
+    }
+
+    private LocalDate mapStringToDate(String date){
+        return LocalDate.parse(date);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }

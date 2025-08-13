@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Home Page</title>
 </head>
+
 <body>
     <h1>Personal Blog</h1>
+    <div th:if="${isAdmin}">
+        <a th:href="@{/new}">Add</a>
+    </div>
     <div th:each="a : ${articles}">
         <a th:href="@{/article/{id}(id=${a.id})}" th:text="${a.title}">Article Title</a>
-        <p th:text="${a.content}">Article Content</p>
-        <p th:text="${a.date}">Article Date</p>
+        <div th:if="${isAdmin}">
+            <a th:href="@{/edit/{id}(id=${a.id})}">Edit</a>
+            <button th:attr="data-id=${a.id}" onclick="deleteArticle(this)">Delete</button>
+        </div>
+        <div th:unless="${isAdmin}">
+            <p th:text="${a.content}">Article Content</p>
+            <p th:text="${a.date}">Article Date</p>
+        </div>
     </div>
 </body>
+
+<script>
+    function deleteArticle(button) {
+        const articleId = button.getAttribute('data-id');
+        fetch(`/article/${articleId}`, {
+            method: 'DELETE'
+        }).then(() => window.location.href = '/admin');
+    }
+</script>
+
 </html>

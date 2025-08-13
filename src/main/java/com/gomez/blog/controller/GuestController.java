@@ -18,13 +18,14 @@ public class GuestController {
     private final ArticleManagementService articleService;
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String getHome(Model model) {
+        model.addAttribute("isAdmin", false);
         model.addAllAttributes(Map.of("articles",articleService.getArticles()));
         return "home";
     }
 
     @GetMapping("/article/{id}")
-    public String getMethodName(Model model, @PathVariable Long id) {
+    public String getArticle(Model model, @PathVariable Long id) {
         model.addAttribute("article", articleService.getArticle(id));
         return "article";
     }

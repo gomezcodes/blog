@@ -22,4 +22,12 @@ public class ArticleManagementService {
         return articleService.get(id);
     }
 
+    public void save(ArticleDto article) {
+        articleService.save(article);
+    }
+
+    public void delete(Long id) {
+        articleService.delete(id);
+    }
+
 }

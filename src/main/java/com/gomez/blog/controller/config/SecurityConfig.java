@@ -2,6 +2,7 @@ package com.gomez.blog.controller.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -12,14 +13,16 @@ public class SecurityConfig {
     
     @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> {
+			http.csrf(csrf -> {
                 csrf.disable();
             })
 			.authorizeHttpRequests((authorize) -> authorize
-            .requestMatchers("/article/**").permitAll()
+            	.requestMatchers("/article/**").permitAll()
 				.requestMatchers("/home").permitAll()
 				.anyRequest().authenticated()
-			);
+			)
+			.formLogin(Customizer.withDefaults())
+			.logout(logout -> logout.permitAll());
 
 		return http.build();
 	}

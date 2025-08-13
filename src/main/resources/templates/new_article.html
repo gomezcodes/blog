@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Article</title>
+</head>
+
+<body>
+    <h1>New Article</h1>
+    <form th:action="@{/new}" th:object="${article}" method="post">
+        <input placeholder="Article Title" type="text" th:field="*{title}" required>
+        <br><br>
+        <input placeholder="Publishing Date" type="date" th:field="*{date}" required>
+        <br><br>
+        <input placeholder="Content" type="text" th:field="*{content}" required>
+        <br><br>
+        <button type="submit">Publish</button>
+    </form>
+</body>
+
+</html>
