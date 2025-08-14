@@ -26,7 +26,7 @@ public class GuestController {
 
     @GetMapping("/article/{id}")
     public String getArticle(Model model, @PathVariable Long id) {
-        model.addAttribute("article", articleService.getArticle(id));
+        model.addAttribute("article", articleService.getFormatedArticle(id));
         return "article";
     }
     

@@ -1,7 +1,6 @@
 package com.gomez.blog.service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,13 +29,8 @@ public class ArticleService {
                     article.getId(), 
                     article.getTitle(),
                     article.getContent(), 
-                    mapDateToString(article.getDate())))
+                    article.getDate().toString()))
             .collect(Collectors.toList());
-    }
-
-    private String mapDateToString(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-        return date.format(formatter);
     }
 
     public ArticleDto get(Long id) {
@@ -47,21 +41,18 @@ public class ArticleService {
         }
 
         Article articleEntity = articleOp.get();
-        ArticleDto article = new ArticleDto(articleEntity.getId(), articleEntity.getTitle(), articleEntity.getContent(), mapDateToString(articleEntity.getDate()));
+        ArticleDto article = new ArticleDto(articleEntity.getId(), articleEntity.getTitle(), articleEntity.getContent(), articleEntity.getDate().toString());
 
         return article;
     }
 
     public void save(ArticleDto article) {
         Article articleToSave = new Article();
-        articleToSave.setTitle(article.title());
-        articleToSave.setContent(article.content());
-        articleToSave.setDate(mapStringToDate(article.date()));
+        articleToSave.setId(article.getId());
+        articleToSave.setTitle(article.getTitle());
+        articleToSave.setContent(article.getContent());
+        articleToSave.setDate(LocalDate.parse(article.getDate()));
         repository.save(articleToSave);
-    }
-
-    private LocalDate mapStringToDate(String date){
-        return LocalDate.parse(date);
     }
 
     public void delete(Long id) {

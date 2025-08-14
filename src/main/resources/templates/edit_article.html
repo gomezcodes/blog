@@ -7,14 +7,16 @@
 
 <body>
     <h1>Edit Article</h1>
-    <form th:action="@{/edit/{id}(id=${article.id})}" th:object="${article}" method="post">
+    <form th:action="@{/edit}" th:object="${article}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <br><br>
         <input placeholder="Article Title" type="text" th:field="*{title}" required>
         <br><br>
         <input placeholder="Publishing Date" type="date" th:field="*{date}" required>
         <br><br>
         <input placeholder="Content" type="text" th:field="*{content}" required>
         <br><br>
-        <button type="submit">Publish</button>
+        <button type="submit">Edit</button>
     </form>
 </body>
 

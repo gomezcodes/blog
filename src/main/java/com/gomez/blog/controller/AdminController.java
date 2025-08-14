@@ -15,13 +15,6 @@ import com.gomez.blog.service.model.ArticleDto;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
-
-
 
 @Controller
 @RequiredArgsConstructor
@@ -55,13 +48,14 @@ public class AdminController {
     }
 
     @GetMapping("/edit/{id}")
-    public String getMethodName(Model model, @PathVariable Long id) {
+    public String getEditView(Model model, @PathVariable Long id) {
         model.addAttribute("article", articleService.getArticle(id));
         return "edit_article";
     }
 
-    @PostMapping("/edit/{id}")
-    public String putMethodName(@PathVariable Long id) {
+    @PostMapping("/edit")
+    public String editArticle(@ModelAttribute ArticleDto article) {
+        articleService.edit(article);
         return "redirect:/home";
     }
 }
